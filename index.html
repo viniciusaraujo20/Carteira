@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIE Digital - Web App</title>
     <link rel="icon" href="./Src/logo.png" type="image/x-icon">
+
     <style>
         /* CSS RESET E BASE */
         * { box-sizing: border-box; }
@@ -180,6 +181,43 @@
     </div>
 
     <script>
+     
+        // Tenta forçar o fullscreen assim que houver QUALQUER interação
+    // Isso é o máximo que o navegador permite por segurança
+    window.addEventListener('click', function() {
+        ativarFullscreenReal();
+    }, { once: true }); // O 'once: true' faz o código rodar só no primeiro clique
+
+    function ativarFullscreenReal() {
+        const element = document.documentElement; // Pega o site inteiro
+        
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) { /* Chrome, Safari e Opera */
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) { /* Internet Explorer / Edge */
+            element.msRequestFullscreen();
+        }
+    }
+
+    function goTo(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Função do Zoom da Carteira (mantida)
+    function toggleZoom() {
+        const container = document.getElementById('wrapper');
+        const backdrop = document.getElementById('backdrop');
+        
+        if (container.classList.contains('zoom-effect')) {
+            container.classList.remove('zoom-effect');
+            backdrop.style.display = 'none';
+        } else {
+            container.classList.add('zoom-effect');
+            backdrop.style.display = 'block';
+        }
+    }
         // Função para trocar de tela
         function goTo(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
