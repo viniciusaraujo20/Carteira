@@ -3,232 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIE Digital - Web App</title>
-    <link rel="icon" href="./Src/logo.png" type="image/x-icon">
+    <title>Vinicius Araújo Bernardina</title>
+    <meta name="description" content="Página pessoal de Vinicius Araújo Bernardina.">
+    <link rel="icon" href="assets/foto.jpg" type="image/jpeg">
 
     <style>
-        /* CSS RESET E BASE */
+        :root {
+            --bg: #f4f2f8;
+            --card: #ffffff;
+            --text: #1f1a2b;
+            --muted: #6b6478;
+            --accent-1: #2cb5e8;
+            --accent-2: #613093;
+            --chip: #efeaf6;
+            --border: #e4deee;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #121018;
+                --card: #1c1925;
+                --text: #f1eef7;
+                --muted: #a59eb3;
+                --chip: #2a2536;
+                --border: #2f2a3b;
+            }
+        }
+
         * { box-sizing: border-box; }
-        body, html {
-            margin: 0;
-            padding: 0;
+        html, body { margin: 0; padding: 0; }
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        /* ESTRUTURA DE TELAS */
-        .screen {
-            display: none;
-            width: 100%;
-            height: 100vh;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(180deg, #2cb5e8 0%, #613093 100%);
-            color: white;
-        }
-
-        .active { display: flex; }
-
-        /* TELA 1 - COVER */
-        #screen1 { cursor: pointer; }
-        .logo-capa { width: 120px; margin-bottom: 20px; }
-
-        /* TELA 2 - MENU */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            width: 90%;
-            max-width: 400px;
-        }
-        .menu-item {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 14px;
-            transition: background 0.3s;
+            padding: 0 16px 40px;
         }
-        .menu-item:active { background: rgba(255, 255, 255, 0.3); }
-        .disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* TELA 3 - CARTEIRA */
-        #screen3 { background: #fdfdfd; color: #333; justify-content: flex-start; }
-        .header-app {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(90deg, #2cb5e8, #613093);
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
+        .banner {
+            width: calc(100% + 32px);
+            height: 180px;
+            background: linear-gradient(120deg, var(--accent-1) 0%, var(--accent-2) 100%);
         }
-        .carteira-container {
-            margin-top: 40px;
-            width: 90%;
-            max-width: 450px;
-        }
-        .img-card {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            cursor: pointer;
-        }
-        .hint-text { color: #999; font-size: 12px; margin-top: 10px; cursor: pointer; }
 
-        /* FOOTER NAV */
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
+        .card {
             width: 100%;
-            height: 70px;
-            display: flex;
-            background: white;
-            border-top: 1px solid #eee;
-        }
-        .nav-btn {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: #888;
-            cursor: pointer;
-        }
-        .nav-btn.active-btn { color: #613093; font-weight: bold; }
-
-        /* OVERLAY FULLSCREEN */
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-        #overlay img {
-            width: 95%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-        .close-hint {
-            position: absolute;
-            bottom: 30px;
-            color: white;
-            font-size: 14px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 15px;
+            max-width: 560px;
+            margin-top: -90px;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 20px;
+            padding: 0 28px 32px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(40, 20, 70, 0.12);
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: -80px;
+            border: 5px solid var(--card);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        h1 {
+            margin: 16px 0 4px;
+            font-size: 28px;
+            letter-spacing: -0.3px;
+        }
+        .role {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .bio {
+            margin: 24px auto 0;
+            max-width: 440px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .section-title {
+            margin: 28px 0 12px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        .chip {
+            background: var(--chip);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 14px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 28px;
+        }
+        .link {
+            display: block;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: transform 0.15s, opacity 0.15s;
+        }
+        .link:hover { transform: translateY(-2px); opacity: 0.92; }
+        .link.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            margin-top: 28px;
+            font-size: 13px;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
 
-    <div id="screen1" class="screen active" onclick="goTo('screen2')">
-        <img src="Src/logo.png" class="logo-capa" alt="CIE">
-        <h2>CARTEIRA DE IDENTIFICAÇÃO<br>ESTUDANTIL</h2>
-        <p style="margin-top: 50px; font-size: 12px;">Desenvolvido por FSBR</p>
-    </div>
+    <div class="banner"></div>
 
-    <div id="screen2" class="screen">
-        <div class="menu-grid">
-            <div class="menu-item" onclick="goTo('screen3')">
-                <span>💳</span><br>Exibir CIE
-            </div>
-            <div class="menu-item" onclick="goTo('screen3')">
-                <span>📲</span><br>Instalar CIE
-            </div>
-            <div class="menu-item" onclick="alert('Sem registros encontrados.')">
-                <span>🚚</span><br>Acompanhar Solicitação
-            </div>
-            <div class="menu-item disabled">
-                <span>📖</span><br>Ver introdução
-            </div>
-        </div>
-        <p style="position: absolute; bottom: 20px; font-size: 10px;">Versão 2.1.12.18</p>
-    </div>
+    <main class="card">
+        <img src="assets/foto.jpg" alt="Foto de Vinicius Araújo Bernardina" class="avatar">
 
-    <div id="screen3" class="screen">
-        <div class="header-app">Minha Carteira</div>
-        
-        <div class="carteira-container">
-            <img src="./Src/Carteira.png" class="img-card" onclick="toggleFull(true)">
-            <p class="hint-text" onclick="toggleFull(true)">TOQUE PARA VER EM FULL HD</p>
+        <h1>Vinicius Araújo Bernardina</h1>
+        <!-- Troque pela sua profissão/área -->
+        <p class="role">Tecnologia &amp; Desenvolvimento</p>
+
+        <!-- Escreva aqui um pouco sobre você -->
+        <p class="bio">
+            Olá! Eu sou o Vinicius. Este é o meu cantinho na internet, onde
+            compartilho um pouco sobre mim, meus projetos e como falar comigo.
+        </p>
+
+        <!-- Edite os interesses à vontade -->
+        <h2 class="section-title">Interesses</h2>
+        <div class="chips">
+            <span class="chip">Tecnologia</span>
+            <span class="chip">Programação</span>
+            <span class="chip">Projetos pessoais</span>
+            <span class="chip">Aprendizado contínuo</span>
         </div>
 
-        <div class="footer-nav">
-            <div class="nav-btn active-btn"><span>🎫</span>Carteira</div>
-            <div class="nav-btn" onclick="alert('Funcionalidade em breve!')"><span>📍</span>Onde usar</div>
-            <div class="nav-btn" onclick="alert('Funcionalidade em breve!')"><span>🎁</span>Vantagens</div>
-            <div class="nav-btn" onclick="alert('Funcionalidade em breve!')"><span>👤</span>Meu Perfil</div>
+        <div class="links">
+            <a class="link" href="https://github.com/viniciusaraujo20" target="_blank" rel="noopener">GitHub</a>
+            <!-- Coloque o link do seu LinkedIn / Instagram / e-mail nos itens abaixo -->
+            <a class="link secondary" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="link secondary" href="#" target="_blank" rel="noopener">Instagram</a>
         </div>
-    </div>
+    </main>
 
-    <div id="overlay" onclick="toggleFull(false)">
-        <img src="./Src/Carteira.png" alt="CIE Fullscreen">
-        <div class="close-hint">Toque para fechar</div>
-    </div>
+    <footer>© <span id="ano"></span> Vinicius Araújo Bernardina</footer>
 
     <script>
-     
-        // Tenta forçar o fullscreen assim que houver QUALQUER interação
-    // Isso é o máximo que o navegador permite por segurança
-    window.addEventListener('click', function() {
-        ativarFullscreenReal();
-    }, { once: true }); // O 'once: true' faz o código rodar só no primeiro clique
-
-    function ativarFullscreenReal() {
-        const element = document.documentElement; // Pega o site inteiro
-        
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) { /* Chrome, Safari e Opera */
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) { /* Internet Explorer / Edge */
-            element.msRequestFullscreen();
-        }
-    }
-
-    function goTo(id) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-
-    // Função do Zoom da Carteira (mantida)
-    function toggleZoom() {
-        const container = document.getElementById('wrapper');
-        const backdrop = document.getElementById('backdrop');
-        
-        if (container.classList.contains('zoom-effect')) {
-            container.classList.remove('zoom-effect');
-            backdrop.style.display = 'none';
-        } else {
-            container.classList.add('zoom-effect');
-            backdrop.style.display = 'block';
-        }
-    }
-        // Função para trocar de tela
-        function goTo(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
-        // Função para ligar/desligar tela cheia
-        function toggleFull(show) {
-            const overlay = document.getElementById('overlay');
-            overlay.style.display = show ? 'flex' : 'none';
-        }
+        document.getElementById('ano').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
